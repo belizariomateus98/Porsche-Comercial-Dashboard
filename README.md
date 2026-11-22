@@ -1,87 +1,87 @@
-# Porsche Commercial Performance Dashboard
+Dashboard de Performance Comercial Porsche
 
-An interactive, single-page commercial performance dashboard built from the `Sanitized` worksheet of the supplied Porsche sales workbook.
+Um dashboard interativo de performance comercial, desenvolvido em uma única página HTML, utilizando a aba Sanitized da planilha de vendas Porsche fornecida.
 
-## Dashboard
+Dashboard
 
-After GitHub Pages is enabled, the dashboard will be available at:
+Após a ativação do GitHub Pages, o dashboard estará disponível no endereço:
 
-`https://<github-username>.github.io/<repository-name>/`
+https://<usuario-github>.github.io/<nome-repositorio>/
 
-> Publication status: not yet deployed. The GitHub account must be connected and the public-data exposure approved before publishing.
+Status da publicação: ainda não publicado. É necessário conectar a conta do GitHub e aprovar a exposição dos dados antes de disponibilizar uma versão pública.
 
-## Business questions selected — and why
+Questões de negócio selecionadas — e justificativas
 
-The dashboard focuses on questions that support commercial performance management:
+O dashboard foi desenvolvido para responder a questões relevantes para a gestão de performance comercial:
 
-1. **Who generates the highest sales value, and who has the highest average ticket?**  
-   This separates sales scale from transaction value and helps distinguish high-volume performance from high-value selling.
-2. **Which state leads in sales value, and which has the highest average ticket?**  
-   The source contains state and city fields, but no explicit region field. State is therefore used as the geographic comparison dimension rather than inventing regional groupings.
-3. **Which Porsche model sells the most units, and which generates the highest sales value?**  
-   Unit volume and revenue answer different product-mix questions: popularity versus financial contribution.
-4. **How do sales evolve month by month, and which cities contribute the most revenue?**  
-   Monthly revenue helps monitor timing and seasonality. City revenue highlights geographic concentration in financial terms.
+Quem gera o maior faturamento e quem possui o maior ticket médio?
+Essa análise diferencia o desempenho em volume de vendas do valor financeiro das transações, permitindo identificar vendedores que se destacam pela quantidade de vendas ou pela comercialização de produtos de maior valor.
 
-The top-salesperson ranking emphasizes the three highest revenue contributors and lists the next seven. Average-ticket leader insights require at least two sales when possible, reducing the influence of a single unusually large transaction.
+Qual estado lidera em faturamento e qual possui o maior ticket médio?
+A base de dados contém informações de estados e cidades, mas não apresenta uma classificação explícita por região. Por isso, o estado foi utilizado como dimensão geográfica de comparação, evitando agrupamentos não fundamentados.
 
-## Prompt history and changes through the final version
+Qual modelo Porsche vende mais unidades e qual gera o maior faturamento?
+A quantidade de unidades vendidas e o faturamento respondem a questões diferentes sobre o portfólio de produtos: popularidade e contribuição financeira.
 
-The dashboard was developed iteratively from four user prompts:
+Como as vendas evoluem mensalmente e quais cidades mais contribuem para o faturamento?
+A evolução mensal permite acompanhar tendências e possíveis sazonalidades. Já o faturamento por cidade ajuda a identificar a concentração geográfica das vendas.
 
-### Prompt 1 — Initial brief
+O ranking dos vendedores apresenta os dez melhores desempenhos em faturamento, com destaque visual para os três primeiros colocados. A análise de ticket médio considera, sempre que possível, vendedores com pelo menos duas transações, reduzindo a influência de uma única venda de valor excepcional.
 
-> Build a professional commercial performance dashboard in HTML from the attached workbook, using the `Sanitized` worksheet as the main source and the pivot-table worksheet as supporting reference. Include filters for sales month/year, state, payment method and delivery status; KPIs for total sales value in USD, number of sales and average ticket; business answers for top salesperson, geographic leader and Porsche model performance; a top-10 salesperson ranking with the top three highlighted; a year-over-year sales line chart; and an 80/20 city sales area/Pareto chart. Use the Porsche international website as visual inspiration, with a clean, elegant, premium and minimal style. All dashboard copy should be in English.
+Histórico dos prompts e evolução até a versão final
 
-### Prompt 2 — Premium visual direction and monthly trend
+O dashboard foi desenvolvido de forma iterativa, a partir de quatro solicitações principais:
 
-The design was refined with Porsche imagery, a stronger gold palette, larger typography and fewer unnecessary subtitles/legends. The date filter changed from month-year to **year only**. The annual trend chart changed to a **monthly sales evolution** chart, showing the months for the selected year. The city Pareto chart became a straightforward city column chart.
+Prompt 1 — Solicitação inicial
 
-### Prompt 3 — Financial city metric and multi-select filters
+Desenvolva um dashboard profissional de performance comercial em HTML, utilizando a planilha anexada e a aba Sanitized como principal fonte de dados, com a aba de tabela dinâmica como referência complementar. Inclua filtros por mês e ano de venda, estado, forma de pagamento e status de entrega; indicadores de faturamento total em USD, quantidade de vendas e ticket médio; respostas às questões de negócio sobre melhor vendedor, desempenho geográfico e desempenho dos modelos Porsche; ranking dos dez melhores vendedores, com destaque para os três primeiros; gráfico de evolução anual das vendas e gráfico de Pareto 80/20 por cidade. Utilize o site internacional da Porsche como inspiração visual, com uma identidade elegante, premium, minimalista e sofisticada. Todo o conteúdo do dashboard deve estar em inglês.
 
-The city chart changed from transaction count to **sales value by city**. All filters became multi-select controls. Filter option text and labels use gold on a light-grey background. The overall palette changed from white to **light grey, black and gold**.
+Prompt 2 — Refinamento visual e evolução mensal
 
-### Prompt 4 — Month labels with year
+O design foi aprimorado com imagens da Porsche, maior presença da paleta dourada, tipografia ampliada e remoção de legendas e subtítulos desnecessários.
 
-The monthly trend labels were updated to include the year, e.g. `Jan/24`, so months from different years can be distinguished when multiple years are selected.
+O filtro de data foi simplificado para somente o ano. O gráfico de evolução anual foi transformado em um gráfico de evolução mensal das vendas, exibindo os meses do ano selecionado. O gráfico de Pareto por cidade foi substituído por um gráfico de colunas mais simples.
 
-## Data preparation before using AI
+Prompt 3 — Indicador financeiro por cidade e filtros múltiplos
 
-The workbook contains two worksheets: `Tabela_Dinamica` and `Sanitized`.
+O gráfico de cidades deixou de apresentar a quantidade de transações e passou a exibir o valor financeiro das vendas por cidade.
 
-- `Sanitized` was selected as the source of truth: **100 rows and 12 columns**.
-- The `Tabela_Dinamica` worksheet is a pre-aggregated pivot-style view with layout/blank cells; it was not used as the row-level data source.
-- The `Sanitized` worksheet had no missing values in the 100 observed rows.
-- `SaleDateSanitized` was parsed as a date using the source format `YYYY-MM-DD`. The dashboard groups it by year and month; days are not used as a filter.
-- Salesperson display names were normalized to title case for consistent grouping (for example, `kevin` / `KEVIN` style variations are displayed consistently).
-- The dashboard data payload uses the fields needed for its visuals: sale ID, date, Porsche model, model year, sales price, payment method, city, state, salesperson and delivery status. Customer names and vehicle mileage are not needed for the requested analysis and are omitted from the dashboard payload.
-- Sales price values are displayed as USD because the brief explicitly requested USD. The workbook itself does not provide a separate currency metadata field, so this is a presentation assumption rather than an independently verified currency conversion.
-- No sales amounts were converted or recalculated. Average ticket is calculated as total sales value divided by transaction count.
+Todos os filtros foram transformados em seleções múltiplas (multi-select). Os textos das opções e dos filtros passaram a utilizar a cor dourada sobre um fundo cinza-claro.
 
-## Tools and implementation approach
+A identidade visual também foi ajustada para uma combinação de cinza-claro, preto e dourado.
 
-The dashboard was authored through ChatGPT in a conversational coding workflow and delivered as a standalone HTML page using JavaScript and Chart.js.
+Prompt 4 — Identificação dos meses com o respectivo ano
 
-- **ChatGPT Canvas:** not used.
-- **Agent with a skill:** not used.
-- **Both:** no. This was not a Canva-generated design or an agent-skill workflow; it was a direct HTML/CSS/JavaScript implementation iterated through the four prompts.
+Os rótulos do gráfico de evolução mensal foram atualizados para incluir o ano, por exemplo, Jan/24, permitindo identificar corretamente os períodos e diferenciar meses pertencentes a anos distintos.
 
-The HTML includes the dashboard data payload and uses Chart.js from a CDN, so an internet connection is required for charts to render.
+Preparação dos dados antes da utilização da IA
 
-## Repository contents
+A planilha original contém duas abas: Tabela_Dinamica e Sanitized.
 
-- `index.html` — interactive dashboard.
-- `README.md` — project description, business rationale, prompt history and data-preparation notes.
+A aba Sanitized foi selecionada como fonte principal de dados, contendo 100 registros e 12 colunas.
 
-## Publishing with GitHub Pages
+A aba Tabela_Dinamica apresenta uma estrutura pré-agregada, semelhante a uma tabela dinâmica, com células em branco e particularidades de formatação. Por esse motivo, não foi utilizada como fonte principal para a análise dos registros individuais.
 
-1. Create a **public** GitHub repository and upload `index.html` and `README.md` to its root.
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, select **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)`, then save.
-5. Wait for GitHub Pages to finish deploying. The public dashboard URL will be:
-   `https://<github-username>.github.io/<repository-name>/`
+Não foram identificados valores ausentes nos 100 registros analisados da aba Sanitized.
 
-## Public-data caution
+A coluna SaleDateSanitized foi interpretada como data, considerando o formato original YYYY-MM-DD. O dashboard agrupa as informações por ano e mês, sem utilizar os dias como filtro.
 
-The dashboard HTML contains an embedded transaction-level data payload so its filters and charts work without a backend. Although customer names and mileage are omitted, the payload includes transaction dates, sale IDs, prices, models, cities, states, payment methods, salesperson names and delivery statuses. A public GitHub repository makes this data accessible to anyone. Obtain authorization to publish these commercial records, or replace the embedded payload with approved aggregate/demo data, before making the repository public.
+Os nomes dos vendedores foram padronizados para o formato de iniciais maiúsculas, garantindo consistência na consolidação dos dados (por exemplo, variações como kevin e KEVIN passam a ser exibidas de maneira uniforme).
+
+O conjunto de dados utilizado no dashboard contém somente os campos necessários para os indicadores e gráficos: identificador da venda, data, modelo Porsche, ano do modelo, preço de venda, forma de pagamento, cidade, estado, vendedor e status de entrega. Os nomes dos clientes e a quilometragem dos veículos foram excluídos, pois não eram necessários para as análises solicitadas.
+
+Os valores de venda são apresentados em USD porque a solicitação inicial determinou essa moeda. Entretanto, a planilha não possui um campo específico que confirme a moeda original. Portanto, trata-se de uma premissa de apresentação, e não de uma conversão cambial comprovada.
+
+Nenhum valor de venda foi convertido ou recalculado. O ticket médio é calculado dividindo o faturamento total pela quantidade de transações.
+
+Ferramentas e abordagem de implementação
+
+O dashboard foi desenvolvido por meio de um fluxo conversacional de programação com o ChatGPT, resultando em uma página HTML independente, utilizando JavaScript e a biblioteca Chart.js.
+
+ChatGPT Canvas: não utilizado.
+
+Agente com skill: não utilizado.
+
+Ambos: não. O projeto não foi desenvolvido por meio do Canva nem de um fluxo baseado em agente com habilidades específicas. Foi uma implementação direta em HTML, CSS e JavaScript, aprimorada iterativamente a partir dos quatro prompts apresentados.
+
+O arquivo HTML contém os dados utilizados pelo dashboard e utiliza a biblioteca Chart.js por meio de uma CDN. Portanto, é necessária uma conexão com a internet para o carregamento dos gráficos.
